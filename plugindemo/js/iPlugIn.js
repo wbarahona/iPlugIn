@@ -38,15 +38,14 @@
 			var slideTo=0;
 			timer=self.setInterval(function(){
 
-				//*****************  FADE OUT TRANSITION  ***********************
-				// $('#slider-container').fadeOut(plugInBase.settings.speed, function(){
-				// 	$('.slideshow-frame').eq(0).insertAfter($('.slideshow-frame').eq((totalFrames-1)));
-				// 	$('#slider-container').fadeIn(plugInBase.settings.speed);
-				// });
-				// step++;
-
-				/******************  SWIPE TRANSITION  ************************/
-				plugInBase.manualanimateSlide(1);
+					if(plugInBase.settings.animation == 'fade')
+					{
+						plugInBase.fadeOutInAnimation(plugInBase.settings.animationDirection);
+					}
+					else
+					{
+						plugInBase.manualanimateSlide(plugInBase.settings.animationDirection);
+					}
 
 			},plugInBase.settings.timeout);
 		};
@@ -56,7 +55,14 @@
 				navArrowBase = $(this);
 
 				navArrowBase.click(function(){
-					plugInBase.manualanimateSlide(index);
+					if(plugInBase.settings.animation == 'fade')
+					{
+						plugInBase.fadeOutInAnimation(index);
+					}
+					else
+					{
+						plugInBase.manualanimateSlide(index);
+					}
 				});
 
 				navArrowBase.hover(function(){
@@ -65,9 +71,10 @@
 					plugInBase.autoanimateCarousel(settings);
 				});
 			});
-		}
+		};
 
 		plugInBase.manualanimateSlide = function(flag){
+			//******************  SWIPE TRANSITION  ************************/
 			if(flag == 0){
 				$('.slideshow-frame').eq((totalFrames-1)).insertBefore($('.slideshow-frame').eq(0));
 				$('#slider-container').stop(1,1).animate({marginLeft: '-300px'},plugInBase.settings.speed);
@@ -82,7 +89,18 @@
 					slideTo = 0;
 				}	
 			});
-		}
+		};
+
+		plugInBase.fadeOutInAnimation = function(flag){
+			//*****************  FADE OUT TRANSITION  ***********************
+			$('#slider-container').fadeOut(plugInBase.settings.speed, function(){
+				if(flag == 0)
+					$('.slideshow-frame').eq((totalFrames-1)).insertBefore($('.slideshow-frame').eq(0));
+				else if(flag == 1)
+					$('.slideshow-frame').eq(0).insertAfter($('.slideshow-frame').eq((totalFrames-1)));
+				$('#slider-container').fadeIn(plugInBase.settings.speed);
+			});
+		};
 
 		plugInBase.init(plugInBase.settings);
 	};
@@ -91,7 +109,9 @@
 		speed : 500,
 		stepWidth : 300,
 		timeout: 3000,
-		arrow: '.left-arrow'
+		arrow: '.left-arrow',
+		animation: 'swipe',	//
+		animationDirection: 1 //0 for animate elements from right to left 1 to animate elements from left to right
 	};
 
 }) (jQuery);
