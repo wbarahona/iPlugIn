@@ -10,7 +10,7 @@ $(document).ready(function () {
 	$('#slider-container').thisCarousel({
 		//settings
 		speed:1000,
-		stepWidth:500,
+		stepWidth:300,
 		timeout:3000,
 		arrow:$('.arrow'),
 		//animation: 'fade',
