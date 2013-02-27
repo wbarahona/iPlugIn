@@ -11,7 +11,13 @@
 			plugInBase.parseJSON();
 			plugInBase.autoanimateCarousel(settings);
 			plugInBase.navarrowaction();
+			plugInBase.clickToClose();
+			plugInBase.lightboxListener();
 		};
+
+		//*****************************************************************************************************//
+		//********************************         PARSE JSON FUNCTION         ********************************//
+		//*****************************************************************************************************//
 
 		plugInBase.parseJSON = function(){
 			for(var key in json){
@@ -31,6 +37,10 @@
 			frameCount=0;
 		}
 
+		//*****************************************************************************************************//
+		//********************************    AUTO ANIMATION OF THE CAROUSEL   ********************************//
+		//*****************************************************************************************************//
+
 		plugInBase.autoanimateCarousel = function(settings){
 
 			plugInBase.settings = $.extend({}, $.fn.thisCarousel.defaults, settings)
@@ -49,6 +59,10 @@
 
 			},plugInBase.settings.timeout);
 		};
+
+		//*****************************************************************************************************//
+		//********************************       NEXT - PREVIOUS FUNCTION      ********************************//
+		//*****************************************************************************************************//
 
 		plugInBase.navarrowaction = function(){
 			plugInBase.settings.arrow.each(function(index){
@@ -73,6 +87,10 @@
 			});
 		};
 
+		//*****************************************************************************************************//
+		//********************************        SLIDE CAROUSEL MOTOR         ********************************//
+		//*****************************************************************************************************//
+
 		plugInBase.manualanimateSlide = function(flag){
 			//******************  SWIPE TRANSITION  ************************/
 			if(flag == 0){
@@ -91,6 +109,10 @@
 			});
 		};
 
+		//*****************************************************************************************************//
+		//********************************          FADE OUT IN MOTOR          ********************************//
+		//*****************************************************************************************************//
+
 		plugInBase.fadeOutInAnimation = function(flag){
 			//*****************  FADE OUT TRANSITION  ***********************
 			$('#slider-container').fadeOut(plugInBase.settings.speed, function(){
@@ -102,15 +124,71 @@
 			});
 		};
 
+		//*****************************************************************************************************//
+		//********************************       CLOSE LIGHTBOX FUNCTION       ********************************//
+		//*****************************************************************************************************//
+
+		plugInBase.clickToClose = function(){
+			$('#closebox').click(function(){
+				plugInBase.closeLightBox();
+			});
+
+			$('#fade').click(function(){
+				plugInBase.closeLightBox();
+			});
+		};
+
+		plugInBase.closeLightBox = function(){
+			$('#light').animate({height:'0'}).fadeOut(400,function(){
+				$('#closebox').fadeOut(200);
+				$('#fade').fadeOut(200);
+			});
+		};
+
+		//*****************************************************************************************************//
+		//********************************       LIGHTBOX FUNCTIONALITY        ********************************//
+		//*****************************************************************************************************//
+		plugInBase.lightboxListener = function(){
+			var pupUpElement = $('.popup_lightbox');
+
+			//fijo cambiara a each
+			pupUpElement.each(function(index){
+				thisFrame = $(this);
+
+				thisFrame.click(function(){
+					plugInBase.popLightbox($('.popup_lightbox').eq(0).prop("outerHTML"));
+				});
+			});
+
+			pupUpElement.hover(function(){
+				clearInterval(timer);
+			},function(){
+				plugInBase.autoanimateCarousel(settings);
+			});
+		};
+
+		plugInBase.popLightbox = function(frameHTML){
+			$('#fade').fadeIn(1000, function(){
+				$('#light').fadeIn(800).animate({height:'50%'});
+				$('#closebox').fadeIn();
+
+				plugInBase.appendLightboxContent(frameHTML);
+			});
+		}
+
+		plugInBase.appendLightboxContent = function(frameHTML){
+			$('#light').html(frameHTML);
+		};
+
 		plugInBase.init(plugInBase.settings);
 	};
 
 	$.fn.thisCarousel.defaults = {
-		speed : 500,
-		stepWidth : 300,
-		timeout: 3000,
-		arrow: '.left-arrow',
-		animation: 'swipe',	//
+		speed : 500, //speed of the swipe/fade animation
+		stepWidth : 300, //width of each frame
+		timeout: 3000, //Set the timeout of the delay
+		arrow: '.arrow', //define the single class of the navigation arrows
+		animation: 'swipe',	//this will set the default animation to a swipe
 		animationDirection: 1 //0 for animate elements from right to left 1 to animate elements from left to right
 	};
 

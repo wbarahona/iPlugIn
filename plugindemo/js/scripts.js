@@ -5,16 +5,15 @@ var byclickStep=0,
 	frameCount=0,
 	step=0;
 
-$(document).ready(function () {
 
+$(document).ready(function () {
 	$('#slider-container').thisCarousel({
 		//settings
-		speed:300,
+		speed:1000,
 		stepWidth:500,
 		timeout:3000,
 		arrow:$('.arrow'),
-		animation: 'fade',
+		//animation: 'fade',
 		animationDirection: 0
 	});
-	
 });
