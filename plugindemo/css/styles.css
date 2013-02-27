@@ -83,7 +83,7 @@ p{margin: 20px 10px;}
     position: absolute;
     top: 25%;
     left: 25%;
-    width: 50%;
+    width: 0;
     height:0;
     /*height: 50%;*/
     padding: 20px;
@@ -101,8 +101,8 @@ p{margin: 20px 10px;}
     cursor: pointer;
     position:absolute;
     z-index: 9999;
-    top: 23.5%;
-    left: 76.5%;
+    top: 23.2%;
+    left: 24.3%;
     color:white;
     font-size:12px;
     font-family:arial;

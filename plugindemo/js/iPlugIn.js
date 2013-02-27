@@ -139,7 +139,7 @@
 		};
 
 		plugInBase.closeLightBox = function(){
-			$('#light').animate({height:'0'}).fadeOut(400,function(){
+			$('#light').animate({height:'0'},400).animate({width:'0'},400).fadeOut(400,function(){
 				$('#closebox').fadeOut(200);
 				$('#fade').fadeOut(200);
 			});
@@ -169,7 +169,7 @@
 
 		plugInBase.popLightbox = function(frameHTML){
 			$('#fade').fadeIn(1000, function(){
-				$('#light').fadeIn(800).animate({height:'50%'});
+				$('#light').fadeIn(800).animate({width:'50%'},400).animate({height:'50%'},400);
 				$('#closebox').fadeIn();
 
 				plugInBase.appendLightboxContent(frameHTML);
