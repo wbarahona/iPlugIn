@@ -29,8 +29,8 @@
 								frameCount++;
 							}
 						}
-				} else if(typeof json[key] === "string") {
-					console.log('plain string found: ' +key + " = " + json[key]);
+				} else if(typeof json[key] === "string" && key == 'lightbox') {
+					$('body').append(json[key]);
 				}
 			}
 			totalFrames = frameCount;
@@ -93,16 +93,17 @@
 
 		plugInBase.manualanimateSlide = function(flag){
 			//******************  SWIPE TRANSITION  ************************/
+			thisWidth=$('#slider-container').children().width();
 			if(flag == 0){
 				
 				$('#slider-container').stop(1,1).animate({marginLeft: '0px'},plugInBase.settings.speed, function(){
 					$('.slideshow-frame').eq((totalFrames-1)).insertBefore($('.slideshow-frame').eq(0));
-					$('#slider-container').css({marginLeft: '-'+plugInBase.settings.stepWidth+'px'});
+					$('#slider-container').css({marginLeft: '-'+thisWidth+'px'});
 				});
 				$('#slider-container').stop(1,1).animate({marginLeft: '0px'},plugInBase.settings.speed);
 			}
 			if(flag == 1){
-				$('#slider-container').stop(1,1).animate({marginLeft: '-'+plugInBase.settings.stepWidth+'px'},plugInBase.settings.speed, function(){
+				$('#slider-container').stop(1,1).animate({marginLeft: '-'+thisWidth+'px'},plugInBase.settings.speed, function(){
 					$('.slideshow-frame').eq(0).insertAfter($('.slideshow-frame').eq((totalFrames-1)));
 					$('#slider-container').css({marginLeft: 0});
 				});
@@ -186,7 +187,6 @@
 
 	$.fn.thisCarousel.defaults = {
 		speed : 500, //speed of the swipe/fade animation
-		stepWidth : 300, //width of each frame
 		timeout: 3000, //Set the timeout of the delay
 		arrow: '.arrow', //define the single class of the navigation arrows
 		animation: 'swipe',	//this will set the default animation to a swipe
