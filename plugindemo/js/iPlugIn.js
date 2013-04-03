@@ -9,10 +9,12 @@
 
 		plugInBase.init = function(settings){
 			plugInBase.parseJSON();
-			plugInBase.autoanimateCarousel(settings);
-			plugInBase.navarrowaction();
+			//uncomment this two below to have the carousel effect
+			//plugInBase.autoanimateCarousel(settings);
+			//plugInBase.navarrowaction();
 			plugInBase.clickToClose();
 			plugInBase.lightboxListener();
+			plugInBase.clickStyle();
 		};
 
 		//*****************************************************************************************************//
@@ -155,16 +157,15 @@
 			//fijo cambiara a each
 			pupUpElement.each(function(index){
 				thisFrame = $(this);
-
 				thisFrame.click(function(){
-					plugInBase.popLightbox($('.popup_lightbox').eq(0).prop("outerHTML"));
+					plugInBase.popLightbox($('.popup_lightbox').eq(index).prop("outerHTML"));
 				});
 			});
 
 			pupUpElement.hover(function(){
 				clearInterval(timer);
 			},function(){
-				plugInBase.autoanimateCarousel(settings);
+				//plugInBase.autoanimateCarousel(settings);
 			});
 		};
 
@@ -181,6 +182,24 @@
 		plugInBase.appendLightboxContent = function(frameHTML){
 			$('#light').html(frameHTML);
 		};
+
+		//*****************************************************************************************************//
+		//********************************       STACKED  FUNCTIONALITY        ********************************//
+		//*****************************************************************************************************//
+
+		plugInBase.clickStyle = function(){
+			var kitchen = "",
+				material = "";
+
+			$('body').delegate('.style-item','click', function(){
+				index = $('.style-item').index($(this));
+				kitchen = $('select#kitchen-select').val();
+				material = $('select#material-select').val();
+				$('.slideshow-frame').stop(1,1).fadeOut();
+				$('.slideshow-frame.'+kitchen+'.'+material).eq(index).stop(1,1).fadeIn(200, function(){
+				})
+			});
+		}
 
 		plugInBase.init(plugInBase.settings);
 	};

@@ -3,7 +3,6 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/styles.css" />
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="js/scripts.js"></script>
 		<script type="text/javascript" src="js/amazing.js"></script>
 		<script type="text/javascript" src="js/iPlugIn.js"></script>
 	</head>
@@ -11,11 +10,30 @@
 	<body>
 		<h2>THIS IS MY JQUERY PLUG IN THERE ARE MANY LIKE IT BUT THIS ONE IS MINE</h2>
 
-		<div class="arrow arrow-left inline-block"></div>
+		<!-- <div class="arrow arrow-left inline-block"></div> -->
 		<div id="container" class="inline-block">
 			<div id="slider-container">
 			</div>
 		</div>
-		<div class="arrow arrow-right inline-block"></div>
+		<!-- <div class="arrow arrow-right inline-block"></div> -->
+		<div id="kitchen-container">
+			<select name="kitchen-select" id="kitchen-select" class="inline-block">
+				<option value="null">Select a kitchen...</option>
+				<option value="kitchen-a">Kitchen-A</option>
+				<option value="kitchen-b">Kitchen-B</option>
+			</select>
+			<select name="material-select" id="material-select" class="inline-block">
+				<option value="null">Select a material...</option>
+				<option value="material-marble">Marble</option>
+				<option value="material-granite">Granite</option>
+			</select>
+		</div>
+		<div id="style-container">
+			<ul>
+				<li class="style-item" style="border: 1px solid cyan"></li>
+				<li class="style-item" style="border: 1px solid magenta"></li>
+			</ul>
+		</div>
 	</body>
+	<script type="text/javascript" src="js/scripts.js"></script>
 </html>

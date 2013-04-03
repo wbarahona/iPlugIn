@@ -7,6 +7,15 @@
 	vertical-align: top;
 }
 
+.stack-absolute{
+    position: absolute;
+    display: none;
+}
+
+.default-frame{
+    display: block;
+}
+
 p{margin: 20px 10px;}
 
 #container{
@@ -131,3 +140,18 @@ p{margin: 20px 10px;}
     border: 1px solid green;
     cursor: pointer;
 }
+
+#style-container ul{
+    list-style-type: none;
+}
+
+    #style-container ul li{
+        width: 20px;
+        height: 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        -webkit-border-radius: 250px;
+        -moz-border-radius: 250px;
+        -o-border-radius: 250px;
+        border-radius: 250px;
+    }
