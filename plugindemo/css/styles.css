@@ -123,3 +123,11 @@ p{margin: 20px 10px;}
 #closebox:before {
     content: "x";
 }
+
+#lightbox-nav{
+    display: none;
+    width: 100px;
+    height: 50px;
+    border: 1px solid green;
+    cursor: pointer;
+}

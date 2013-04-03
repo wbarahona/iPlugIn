@@ -12,7 +12,7 @@ $(document).ready(function () {
 		speed:1000,
 		timeout:3000,
 		arrow:$('.arrow'),
-		//animation: 'fade',
+		animation: 'fade',
 		animationDirection: 0
 	});
 });
